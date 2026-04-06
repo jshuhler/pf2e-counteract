@@ -17,8 +17,11 @@
     --button-radius: 50px;
     --button-border: ;
     --default-font: 'JetBrains Mono', monospace;
-    --wrapper-color: ;
-    --font-color: ;
+    --background-color: #161310;
+    --container-color: #1e1914;
+    --font-color-main: #ddd0be;
+    --font-color-secondary: #7a6a58;
+    --border-main: #3d3028;
     --header-font-color: ;
     --input-container-color: ;
    }
@@ -26,9 +29,9 @@
 /* ===================================
    MAIN WRAPPER
    =================================== */
-
 .wrapper {
-    background-color: var(--wrapper-color);
+    background-color: var(--background-color);
+    color: var(--font-color-main);
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -49,6 +52,55 @@
    =================================== */
 .input-container {
     display: flex;
+}
+
+/* ===================================
+   BOTH CONTAINERS
+   =================================== */
+.effect-container,
+.target-container {
+    background-color: var(--container-color);
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+    padding: 25px;
+    border-radius: 8px;
+    border: solid 1px var(--border-main);
+}
+
+.source,
+.rank,
+.level,
+.roll-input,
+.target-dc,
+.radio {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+p,
+label {
+    color: var(--font-color-secondary);
+    font-size: var(--h4-font-size);
+}
+
+fieldset {
+    border: none;
+}
+
+input,
+select {
+    color: var(--font-color-main);
+    background-color: var(--background-color);
+}
+
+hr {
+    color: var(--border-main);
+}
+
+.radio label {
+    font-size: 1em;
 }
 
 /* ===================================
