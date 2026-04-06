@@ -14,20 +14,101 @@
         </div>
         <div class="input-container">
             <div class="effect-container">
-                <div class="effect-header">
-                    Counteract Effect
-                </div>
-                <div class="effect-inputs">
-                    
-                </div>
+                <fieldset>
+                    <legend>Counteract Effect</legend>
+                    <div class="source">
+                        <label for="effect-source">SOURCE</label>
+                        <select name="source" id="effect-source">
+                            <option selected="selected"value="spell">Spell</option>
+                            <option value="other">Item, Class Ability, etc</option>
+                        </select>
+                    </div>
+                    <div class="rank">
+                        <label for="effect-rank">SPELL RANK</label>
+                        <select name="rank" id="effect-rank">
+                            <option value="">Select a spell rank</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="level">
+                        <label for="effect-level">EFFECT LEVEL</label>
+                        <select name="level" id="effect-level">
+                            <option value="">Select an effect level</option>
+                            <option value="-1">-1</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <div class="roll-input">
+                        <label for="effect-roll">Roll total:</label>
+                        <input type="number" id="effect-roll" name="effect-roll" min="0" max="100" placeholder="eg: 24">
+                    </div>
+                    <div class="radio">
+                        <input type="radio" id="roll-none" name="roll-specifics" value="none">
+                        <label for="roll-none">None</label>
+                        <input type="radio" id="roll-nat-one" name="roll-specifics" value="nat-one">
+                        <label for="roll-none">Natural 1</label>
+                        <input type="radio" id="roll-nat-twenty" name="roll-specifics" value="nat-twenty">
+                        <label for="roll-none">Natural 20</label>
+                    </div>
+                </fieldset>
             </div>
             <div class="target-container">
-                <div class="target-header">
-                    Target Effect
-                </div>
-                <div class="target-inputs">
+                <fieldset>
+                    <legend>Counteract Target</legend>
+                    <div class="source">
+                        <label for="target-source">SOURCE</label>
+                        <select name="source" id="target-source">
+                            <option selected="selected"value="spell">Spell</option>
+                            <option value="other">Item, Class Ability, etc</option>
+                        </select>
+                    </div>
+                    <div class="rank">
+                        <label for="target-rank">SPELL RANK</label>
+                        <select name="rank" id="target-rank">
+                            <option value="">Select a spell rank</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="level">
+                        <label for="target-level">TARGET LEVEL</label>
+                        <select name="level" id="target-level">
+                            <option value="">Select a target level</option>
+                            <option value="-1">-1</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <div class="roll-input">
+                        <label for="effect-roll">Roll total:</label>
+                        <input type="number" id="effect-roll" name="effect-roll" min="0" max="100" placeholder="eg: 28">
+                    </div>
+                </fieldset>
 
-                </div>
             </div>
         </div>
         <div class="button-container">
