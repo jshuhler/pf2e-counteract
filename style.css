@@ -1,0 +1,61 @@
+/* ===================================
+   EVERYTHING
+   =================================== */
+
+* {
+    font-family: var(--default-font);
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --h1-font-size: 2em;
+    --h2-font-size: 1.45em;
+    --h3-font-size: 1.15em;
+    --h4-font-size: 0.8em;
+    --button-radius: 50px;
+    --button-border: ;
+    --default-font: 'JetBrains Mono', monospace;
+    --wrapper-color: ;
+    --font-color: ;
+    --header-font-color: ;
+    --input-container-color: ;
+   }
+
+/* ===================================
+   MAIN WRAPPER
+   =================================== */
+
+.wrapper {
+    background-color: var(--wrapper-color);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ===================================
+   HEADER
+   =================================== */
+.header {
+    font-size: var(--h1-font-size);
+    font-weight: bold;
+}
+
+/* ===================================
+   INPUT CONTAINTER 
+   =================================== */
+.input-container {
+    display: flex;
+}
+
+/* ===================================
+   EFFECT INPUT CONTAINER
+   =================================== */
+
+
+/* ===================================
+   TARGET INPUT CONTAINER
+   =================================== */
