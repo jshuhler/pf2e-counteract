@@ -7,6 +7,13 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    user-select: none;
+}
+
+button,
+a,
+svg  {
+    cursor: pointer;
 }
 
 :root {
@@ -14,14 +21,18 @@
     --h2-font-size: 1.45em;
     --h3-font-size: 1.15em;
     --h4-font-size: 0.8em;
-    --button-radius: 50px;
+    --button-radius:10px;
     --button-border: ;
+    --calc-button-color: #a84c2a;
+    --calc-button-color-active: #79361e;
     --default-font: 'JetBrains Mono', monospace;
     --background-color: #161310;
     --container-color: #1e1914;
+    --success-message-color: ;
+    --failure-message-color: ;
     --font-color-main: #ddd0be;
     --font-color-secondary: #7a6a58;
-    --border-main: #3d3028;
+    --border-color: #3d3028;
     --header-font-color: ;
     --input-container-color: ;
    }
@@ -43,8 +54,38 @@
    HEADER
    =================================== */
 .header {
+    display: flex;
+    width: 100vw;
     font-size: var(--h1-font-size);
     font-weight: bold;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.header svg {
+    fill: var(--font-color-secondary);
+    height: var(--h2-font-size);
+    margin: 0 0 0 35px;
+    padding-top: 15px;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+.title {
+    padding:0px 5px;
+}
+
+/* ===================================
+   COUNTERACT CONTAINER
+   =================================== */
+.counteract-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* ===================================
@@ -52,20 +93,23 @@
    =================================== */
 .input-container {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 /* ===================================
-   BOTH CONTAINERS
+   EFFECT AND TARGET CONTAINERS
    =================================== */
 .effect-container,
 .target-container {
     background-color: var(--container-color);
     display: flex;
     flex-direction: column;
-    margin: 8px;
+    margin: 16px;
     padding: 25px;
     border-radius: 8px;
-    border: solid 1px var(--border-main);
+    border: solid 1px var(--border-color);
+    min-width: 300px;
 }
 
 .source,
@@ -93,21 +137,106 @@ input,
 select {
     color: var(--font-color-main);
     background-color: var(--background-color);
+    border: solid 1px var(--border-color);
+    border-radius: 6px;
+    padding: 5px 2px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
 hr {
-    color: var(--border-main);
+    border: solid 1px var(--border-color);
 }
 
 .radio label {
     font-size: 1em;
 }
 
-/* ===================================
-   EFFECT INPUT CONTAINER
-   =================================== */
+.radio .roll-adjustment {
+    padding-top: 4px;
+    padding-bottom: 2px;
+}
 
+.radio-none,
+.radio-one,
+.radio-twenty {
+    padding-top: 4px;
+}
 
 /* ===================================
-   TARGET INPUT CONTAINER
+   CALCULATE BUTTON
    =================================== */
+.counteract-container button {
+    width: 100%;
+    color: var(--font-color-main);
+    background-color: var(--calc-button-color);
+    border-radius: var(--button-radius);
+    border: solid 1px var(--border-color);
+    padding: 10px 100px;
+    margin: 5px 0px 15px 0px;
+}
+
+.counteract-container button:active {
+    background-color: var(--calc-button-color-active);
+}
+
+/* ===================================
+   RESULTS
+   =================================== */
+.result-container {
+    display: flex;
+    flex-direction: column;
+    border: dashed 1px var(--border-color);
+    border-radius: var(--button-radius);
+    height: 125px;
+    width: 90%;
+}
+
+.result-container .label {
+    padding: 10px 15px;
+}
+
+.result-placeholder {
+    text-align: center;
+    vertical-align: center;
+    color: var(--font-color-secondary);
+    width: 80%;
+    background: none;
+    padding: 10px 15px;
+    border-radius: var(--button-radius);
+    align-self: center;
+}
+
+.result-success {
+    text-align: center;
+    vertical-align: center;
+    color: var(--font-color-secondary);
+    width: 80%;
+    background: var(--success-message-color);
+    padding: 10px 15px;
+    border-radius: var(--button-radius);
+    align-self: center;
+}
+
+.result-failure {
+    text-align: center;
+    vertical-align: center;
+    color: var(--font-color-secondary);
+    width: 80%;
+    background: var(--failure-message-color);
+    padding: 10px 15px;
+    border-radius: var(--button-radius);
+    align-self: center;
+}
+
+/* ===================================
+   FOOTER
+   =================================== */
+.github-icon{
+    fill: var(--font-color-main);
+    padding: 10px;
+   }
