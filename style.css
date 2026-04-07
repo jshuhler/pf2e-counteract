@@ -213,7 +213,7 @@ hr {
 
 .result-success {
     text-align: center;
-    vertical-align: center;
+    vertical-align: baseline;
     color: var(--font-color-secondary);
     width: 80%;
     background: var(--success-message-color);
