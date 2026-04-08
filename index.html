@@ -27,12 +27,12 @@
                         <div class="source">
                             <label for="effect-source">Source</label>
                             <select name="source" id="effect-source">
-                                <option selected="selected"value="spell">Spell</option>
+                                <option value="spell" selected>Spell</option>
                                 <option value="other">Item, Class Ability, etc</option>
                             </select>
                         </div>
-                        <div class="rank">
-                            <label for="effect-rank">Spell rank</label>
+                        <div class="rank" id="effect-rank-container">
+                            <label for="effect-rank" id="effect-rank-label">Spell rank</label>
                             <select name="rank" id="effect-rank">
                                 <option value="">Select a spell rank</option>
                                 <option value="0">0</option>
@@ -48,7 +48,7 @@
                                 <option value="10">10</option>
                             </select>
                         </div>
-                        <div class="level">
+                        <div class="level" id="effect-level-container">
                             <label for="effect-level">Effect level</label>
                             <select name="level" id="effect-level">
                                 <option value="">Select an effect level</option>
@@ -56,6 +56,32 @@
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
                             </select>
                         </div>
                         <hr>
@@ -90,7 +116,7 @@
                                 <option value="other">Item, Class Ability, etc</option>
                             </select>
                         </div>
-                        <div class="rank">
+                        <div class="rank" id="target-rank-container">
                             <label for="target-rank">Spell rank</label>
                             <select name="rank" id="target-rank">
                                 <option value="">Select a spell rank</option>
@@ -107,7 +133,7 @@
                                 <option value="10">10</option>
                             </select>
                         </div>
-                        <div class="level">
+                        <div class="level" id="target-level-container">
                             <label for="target-level">Target level</label>
                             <select name="level" id="target-level">
                                 <option value="">Select a target level</option>
