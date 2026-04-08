@@ -1,49 +1,40 @@
 // ======= IIFE MAIN FUNCTION =======
 const pfCounteract = (() => {
 
-    // updating the DOM on first IIFE run to hide the level dropdown
-    const effectLevel = document.getElementById('effect-level-container');
-    const targetLevel = document.getElementById('target-level-container');
-    effectLevel.classList.add("hidden");
-    targetLevel.classList.add("hidden");
+    // ------ INITIAL DOM UPDATE ON LOAD -------
+
+    const effectLevelContainer = document.getElementById('effect-level-container');
+    const targetLevelContainer = document.getElementById('target-level-container');
+    effectLevelContainer.classList.add("hidden");
+    targetLevelContainer.classList.add("hidden");
+
+    // ------- EFFECT FUNCTIONS -------
 
     // updating the visible dropdown depending on effect source
-    const effectSelect = document.getElementById('effect-source');
-    const effectRank = document.getElementById('effect-rank-container');
-    effectSelect.addEventListener('change', () => {
-        if (effectSelect.value === 'spell') {
-            effectLevel.classList.add("hidden");
-            effectRank.classList.remove("hidden");
-        } else if (effectSelect.value === 'other') {
-            effectRank.classList.add("hidden");
-            effectLevel.classList.remove("hidden");
+    const effectSource = document.getElementById('effect-source');
+    const effectRankContainer = document.getElementById('effect-rank-container');
+    effectSource.addEventListener('change', () => {
+        if (effectSource.value === 'spell') {
+            effectLevelContainer.classList.add("hidden");
+            effectRankContainer.classList.remove("hidden");
+        } else if (effectSource.value === 'other') {
+            effectRankContainer.classList.add("hidden");
+            effectLevelContainer.classList.remove("hidden");
         };
     });
 
-    // updating the visible dropdown depending on target source
-    const targetSelect = document.getElementById('target-source');
-    const targetRank = document.getElementById('target-rank-container');
-    targetSelect.addEventListener('change', () => {
-        if (targetSelect.value === 'spell') {
-            targetLevel.classList.add("hidden");
-            targetRank.classList.remove("hidden");
-        } else if (targetSelect.value === 'other') {
-            targetRank.classList.add("hidden");
-            targetLevel.classList.remove("hidden");
-        };
-    });
-    
     // setting the level of the counteract effect
     const counteractEffectRankSet = () => {
-        const effectSource = document.getElementById('effect-source');
-        if (effectSource === 'spell') {
-
-        } else if (effectSource === 'other') {
-
+        let counteractEffectRank;
+        if (effectSource.value === 'spell') {
+            counteractEffectRank = document.getElementById('effect-rank').value;
+        } else if (effectSource.value === 'other') {
+            counteractEffectRank = document.getElementById('effect-level').value;
         };
+        return counteractEffectRank;
     };
 
-    // taking in the roll total from Foundry
+    // taking in the effect roll total from Foundry
     const counteractEffectRollSet = () => {
         const counteractEffectRoll = {
             rollValue: document.getElementById('effect-roll').value,
@@ -54,14 +45,39 @@ const pfCounteract = (() => {
         return counteractEffectRoll;
     };
 
-    // setting the level of the counteract target
+    // ------- TARGET FUNCTIONS -------
 
+    // updating the visible dropdown depending on target source
+    const targetSource = document.getElementById('target-source');
+    const targetRankContainer = document.getElementById('target-rank-container');
+    targetSource.addEventListener('change', () => {
+        if (targetSource.value === 'spell') {
+            targetLevelContainer.classList.add("hidden");
+            targetRankContainer.classList.remove("hidden");
+        } else if (targetSource.value === 'other') {
+            targetRankContainer.classList.add("hidden");
+            targetLevelContainer.classList.remove("hidden");
+        };
+    });
+
+    // setting the level of the counteract target
+    const counteractTargetRankSet = () => {
+        let counteractTargetRank;
+        if (targetSource.value === 'spell') {
+            counteractTargetRank = document.getElementById('target-rank').value;
+        } else if (targetSource.value === 'other') {
+            counteractTargetRank = document.getElementById('target-level').value;
+        };
+        return counteractTargetRank;
+    };
 
     // setting counteract target dc
     const counteractTargetDCSet = () => {
         const counteractTargetDC = document.getElementById('target-dc');
         return counteractTargetDC;
     };
+
+    // ------- COUNTERACT CALCULATIONS -------
 
     // finding degree of success
     const counteractRollOutcomeSet = (counteractEffectRoll, counteractTargetDC, naturalOne, naturalTwenty) => {
