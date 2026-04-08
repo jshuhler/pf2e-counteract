@@ -1,8 +1,7 @@
 // ======= IIFE MAIN FUNCTION =======
 const pfCounteract = (() => {
 
-    // ------ INITIAL DOM UPDATE ON LOAD -------
-
+    // ------ INITIAL DOM CONFIGURATION ON LOAD -------
     const effectLevelContainer = document.getElementById('effect-level-container');
     const targetLevelContainer = document.getElementById('target-level-container');
     effectLevelContainer.classList.add("hidden");
@@ -80,10 +79,42 @@ const pfCounteract = (() => {
     // ------- COUNTERACT CALCULATIONS -------
 
     // finding degree of success
-    const counteractRollOutcomeSet = (counteractEffectRoll, counteractTargetDC, naturalOne, naturalTwenty) => {
+    const counteractRollOutcomeSet = (counteractEffectRoll, counteractTargetDC) => {
+        let counteractBaseOutcome;
+        let counteractRollOutcome;
+        let degreeOfSuccess = ['critical failure', 'failure', 'success', 'critical success'];
+        if (counteractEffectRoll.rollValue >= counteractTargetDC + 10) {
+            counteractBaseOutcome = degreeOfSuccess[3];
+        } else if ((counteractEffectRoll.rollValue > counteractTargetDC) && (counteractEffectRoll.rollValue < counteractTargetDC + 10)) {
+            counteractBaseOutcome = degreeOfSuccess[2];
+        } else if ((counteractEffectRoll.rollValue < counteractTargetDC) && (counteractEffectRoll.rollValue + 10 > counteractTargetDC)) {
+            counteractBaseOutcome = degreeOfSuccess[1];
+        } else if (counteractEffectRoll.rollValue + 10 < counteractTargetDC) {
+            counteractBaseOutcome = degreeOfSuccess[0];
+        };
+        if ((counteractEffectRoll.naturalOne === true) && (counteractBaseOutcome !== degreeOfSuccess[0])) {
+            counteractRollOutcome = degreeOfSuccess[degreeOfSuccess.indexOf(counteractBaseOutcome) - 1];
+        } else if ((counteractEffectRoll.naturalTwenty === true) && (counteractBaseOutcome !== degreeOfSuccess[3])) {
+            counteractRollOutcome = degreeOfSuccess[degreeOfSuccess.indexOf(counteractBaseOutcome) + 1];
+        } else {
+            counteractRollOutcome = counteractBaseOutcome;
+        };
+        return counteractRollOutcome;
+    };
 
+    // collecting above variables 
+    const counteractVariables = () => {
+        counteractEffectRankSet();
+        counteractEffectRollSet();
+        counteractTargetRankSet();
+        counteractTargetDCSet();
+        counteractRollOutcomeSet();
+    };
+
+    const counteractComparison = () => {
+        counteractVariables();
+        
     }
-
 
 
 })();
