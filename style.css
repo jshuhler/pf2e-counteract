@@ -10,26 +10,6 @@
     user-select: none;
 }
 
-button,
-a,
-svg  {
-    cursor: pointer;
-}
-
-body.light-mode{
-    --calc-button-color: #a84c2a;
-    --calc-button-color-active: #79361e;
-    --background-color: #f0ece4;
-    --container-color: #e4ddd2;
-    --success-message-background: #d4e8c8;
-    --failure-message-background: #f0d4d0;
-    --success-message-text: #2a5018;
-    --failure-message-text: #8b1a14;
-    --font-color-main: #241a10;
-    --font-color-secondary: #695f52;
-    --border-color: #c8bfb0;
-}
-
 :root {
     --h1-font-size: 2em;
     --h2-font-size: 1.45em;
@@ -50,6 +30,30 @@ body.light-mode{
     --border-color: #3d3028;
    }
 
+body {
+    background-color: var(--background-color);
+}
+
+body.light-mode{
+    --calc-button-color: #a84c2a;
+    --calc-button-color-active: #79361e;
+    --background-color: #f0ece4;
+    --container-color: #e4ddd2;
+    --success-message-background: #d4e8c8;
+    --failure-message-background: #f0d4d0;
+    --success-message-text: #2a5018;
+    --failure-message-text: #8b1a14;
+    --font-color-main: #241a10;
+    --font-color-secondary: #695f52;
+    --border-color: #c8bfb0;
+}
+
+button,
+a,
+svg  {
+    cursor: pointer;
+}
+
 /* ===================================
    MAIN WRAPPER
    =================================== */
@@ -68,6 +72,7 @@ body.light-mode{
    =================================== */
 .header {
     display: flex;
+    flex-wrap: wrap;
     width: 100vw;
     font-size: var(--h1-font-size);
     font-weight: bold;
