@@ -76,25 +76,37 @@ svg  {
     width: 100vw;
     font-size: var(--h1-font-size);
     font-weight: bold;
-    position: relative;
+    /* position: relative; */
     justify-content: center;
     align-items: center;
-    padding-top: 15px;
+    padding: 15px;
 }
 
-.header svg {
-    fill: var(--font-color-secondary);
-    height: var(--h2-font-size);
-    margin: 0 0 0 35px;
-    padding-top: 15px;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
+.header .title {
+    width: 80%;
+    text-align: center;
+}
+
+.header .mode-toggle,
+.header .spacer {
+    display: flex;
+    width: 10%;
+    align-items: center;
+    justify-content: right;
 }
 
 .title {
     padding:0px 5px;
+}
+.header svg {
+    fill: var(--font-color-secondary);
+    height: var(--h4-font-size);
+    /* margin: 0 0 0 35px;
+    padding-top: 15px;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%); */
 }
 
 /* ===================================
