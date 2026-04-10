@@ -26,9 +26,9 @@ const pfCounteract = (() => {
     const counteractEffectRankSet = () => {
         let counteractEffectRank;
         if (effectSource.value === 'spell') {
-            counteractEffectRank = document.getElementById('effect-rank').value;
+            counteractEffectRank = parseInt(document.getElementById('effect-rank').value);
         } else if (effectSource.value === 'other') {
-            counteractEffectRank = document.getElementById('effect-level').value;
+            counteractEffectRank = parseInt(document.getElementById('effect-level').value);
         };
         return counteractEffectRank;
     };
@@ -36,7 +36,7 @@ const pfCounteract = (() => {
     // taking in the effect roll total from Foundry
     const counteractEffectRollSet = () => {
         const counteractEffectRoll = {
-            rollValue: document.getElementById('effect-roll').value,
+            rollValue: parseInt(document.getElementById('effect-roll').value),
             noAdjustment: document.getElementById('roll-none').checked,
             naturalOne: document.getElementById('roll-nat-one').checked,
             naturalTwenty: document.getElementById('roll-nat-twenty').checked,
@@ -63,10 +63,11 @@ const pfCounteract = (() => {
     const counteractTargetRankSet = () => {
         let counteractTargetRank;
         if (targetSource.value === 'spell') {
-            counteractTargetRank = document.getElementById('target-rank').value;
+            counteractTargetRank = parseInt(document.getElementById('target-rank').value);
         } else if (targetSource.value === 'other') {
-            counteractTargetRank = document.getElementById('target-level').value;
+            counteractTargetRank = parseInt(document.getElementById('target-level').value); //JEFF YOU NEED TO MAKE THIS DIVIDE BY TWO AND ROUND UP, DUM DUM
         };
+        
         return counteractTargetRank;
     };
 
@@ -121,7 +122,7 @@ const pfCounteract = (() => {
             console.log('Button click!');
             console.log(counteractOutcome);
             // counteractVariables();
-            counteractEffectRankSet();
+            let counteractEffectRank = counteractEffectRankSet();
             counteractEffectRollSet();
             counteractTargetRankSet();
             counteractTargetDCSet();
