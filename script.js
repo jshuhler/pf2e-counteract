@@ -28,7 +28,7 @@ const pfCounteract = (() => {
         if (effectSource.value === 'spell') {
             counteractEffectRank = parseInt(document.getElementById('effect-rank').value);
         } else if (effectSource.value === 'other') {
-            counteractEffectRank = parseInt(document.getElementById('effect-level').value);
+            counteractEffectRank = Math.ceil(parseInt(document.getElementById('effect-level').value)/2);
         };
         return counteractEffectRank;
     };
@@ -65,7 +65,7 @@ const pfCounteract = (() => {
         if (targetSource.value === 'spell') {
             counteractTargetRank = parseInt(document.getElementById('target-rank').value);
         } else if (targetSource.value === 'other') {
-            counteractTargetRank = parseInt(document.getElementById('target-level').value); // JEFF YOU NEED TO MAKE THIS DIVIDE BY TWO AND ROUND UP, DUM DUM
+            counteractTargetRank = Math.ceil(parseInt(document.getElementById('target-level').value)/2);
         };
         
         return counteractTargetRank;
@@ -110,12 +110,15 @@ const pfCounteract = (() => {
         };
         const calculateButton = document.getElementById('calculate');
         calculateButton.addEventListener('click', () => {
-            console.log('Button click!');
             let counteractEffectRank = counteractEffectRankSet();
             let counteractEffectRoll = counteractEffectRollSet();
             let counteractTargetRank = counteractTargetRankSet();
             let counteractTargetDC = counteractTargetDCSet();
             let counteractRollOutcome = counteractRollOutcomeSet(counteractEffectRoll, counteractTargetDC);
+            console.log(`Roll Degree of Success: ${counteractRollOutcome}`)
+            console.log(`Target Rank: ${counteractTargetRank}`);
+            console.log(`Effect Rank: ${counteractEffectRank}`);
+            console.log(`----------`);
             if (counteractTargetRank > counteractEffectRank + 3) {
                 counteractOutcome.outcome = 'failure';
                 counteractOutcome.message = 'The target is more than 3 levels higher than the counteract effect - this is an impossible task';
@@ -139,7 +142,7 @@ const pfCounteract = (() => {
                 counteractOutcome.message = 'The counteract check has failed';
             } else if (counteractRollOutcome === 'critical failure') {
                 counteractOutcome.outcome = 'failure';
-                counteractOutcome.message = 'The counteract check has critially failed';
+                counteractOutcome.message = 'The counteract check has critically failed';
             };
             displayController(counteractOutcome);
         });
@@ -148,7 +151,6 @@ const pfCounteract = (() => {
     counteractComparison();
 
     // display controller to update the DOM and dark/light modes
-
     const displayController = (counteractOutcome) => {
         const resultText = document.getElementById('result-text');
         resultText.className = "";
@@ -160,7 +162,17 @@ const pfCounteract = (() => {
             resultText.textContent = counteractOutcome.message;
         } else {
             resultText.className = 'result-placeholder';
-            resultText.textContent = "Fill out the fields above and click Calculate"
+            resultText.textContent = "Fill out the fields above and click Calculate";
         };
     };
+
+    // dark/light mode
+    const setTheme = () => {
+        const body = document.body;
+        const newTheme = body.className === "light-mode" ? "" : "light-mode";
+        body.className = newTheme;
+    };
+
+    document.querySelector(".mode-toggle").addEventListener('click', setTheme);
+
 })();
