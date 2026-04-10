@@ -28,8 +28,10 @@ svg  {
     --default-font: 'JetBrains Mono', monospace;
     --background-color: #161310;
     --container-color: #1e1914;
-    --success-message-color: ;
-    --failure-message-color: ;
+    --success-message-background: #1e3a20;
+    --failure-message-background: #3a1a18;
+    --success-message-text: #8fbe68;
+    --failure-message-text: #c0392b;
     --font-color-main: #ddd0be;
     --font-color-secondary: #7a6a58;
     --border-color: #3d3028;
@@ -200,8 +202,10 @@ hr {
     flex-direction: column;
     border: dashed 1px var(--border-color);
     border-radius: var(--button-radius);
-    height: 125px;
+    /* look into how to get height of this element to expand when it's an impossible task, otherwise be 125px */
+    height: 125px; 
     width: 90%;
+    max-width: 600px;
 }
 
 .result-container .label {
@@ -224,7 +228,8 @@ hr {
     vertical-align: baseline;
     color: var(--font-color-secondary);
     width: 80%;
-    background: var(--success-message-color);
+    background: var(--success-message-background);
+    color: var(--success-message-text);
     padding: 10px 15px;
     border-radius: var(--button-radius);
     align-self: center;
@@ -235,7 +240,8 @@ hr {
     vertical-align: center;
     color: var(--font-color-secondary);
     width: 80%;
-    background: var(--failure-message-color);
+    background: var(--failure-message-background);
+    color: var(--failure-message-text);
     padding: 10px 15px;
     border-radius: var(--button-radius);
     align-self: center;

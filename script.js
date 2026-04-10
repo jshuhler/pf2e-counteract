@@ -65,7 +65,7 @@ const pfCounteract = (() => {
         if (targetSource.value === 'spell') {
             counteractTargetRank = parseInt(document.getElementById('target-rank').value);
         } else if (targetSource.value === 'other') {
-            counteractTargetRank = parseInt(document.getElementById('target-level').value); //JEFF YOU NEED TO MAKE THIS DIVIDE BY TWO AND ROUND UP, DUM DUM
+            counteractTargetRank = parseInt(document.getElementById('target-level').value); // JEFF YOU NEED TO MAKE THIS DIVIDE BY TWO AND ROUND UP, DUM DUM
         };
         
         return counteractTargetRank;
@@ -73,44 +73,35 @@ const pfCounteract = (() => {
 
     // setting counteract target dc
     const counteractTargetDCSet = () => {
-        const counteractTargetDC = document.getElementById('target-dc');
+        const counteractTargetDC = parseInt(document.getElementById('target-dc').value);
         return counteractTargetDC;
     };
 
     // ------- COUNTERACT CALCULATIONS -------
 
-    // finding degree of success for the roll 
+    // finding degree of success for the effect roll vs the target DC
     const counteractRollOutcomeSet = (counteractEffectRoll, counteractTargetDC) => {
         let counteractBaseOutcome;
         let counteractRollOutcome;
         let degreeOfSuccess = ['critical failure', 'failure', 'success', 'critical success'];
-        if (counteractEffectRollSet.rollValue >= counteractTargetDC + 10) {
+        if (counteractEffectRoll.rollValue >= counteractTargetDC + 10) {
             counteractBaseOutcome = degreeOfSuccess[3];
-        } else if ((counteractEffectRollSet.rollValue > counteractTargetDC) && (counteractEffectRollSet.rollValue < counteractTargetDC + 10)) {
+        } else if ((counteractEffectRoll.rollValue >= counteractTargetDC) && (counteractEffectRoll.rollValue < counteractTargetDC + 10)) {
             counteractBaseOutcome = degreeOfSuccess[2];
-        } else if ((counteractEffectRollSet.rollValue < counteractTargetDC) && (counteractEffectRollSet.rollValue + 10 > counteractTargetDC)) {
+        } else if ((counteractEffectRoll.rollValue < counteractTargetDC) && (counteractEffectRoll.rollValue + 10 > counteractTargetDC)) {
             counteractBaseOutcome = degreeOfSuccess[1];
-        } else if (counteractEffectRollSet.rollValue + 10 < counteractTargetDC) {
+        } else if (counteractEffectRoll.rollValue + 10 < counteractTargetDC) {
             counteractBaseOutcome = degreeOfSuccess[0];
         };
-        if ((counteractEffectRollSet.naturalOne === true) && (counteractBaseOutcome !== degreeOfSuccess[0])) {
+        if ((counteractEffectRoll.naturalOne === true) && (counteractBaseOutcome !== degreeOfSuccess[0])) {
             counteractRollOutcome = degreeOfSuccess[degreeOfSuccess.indexOf(counteractBaseOutcome) - 1];
-        } else if ((counteractEffectRollSet.naturalTwenty === true) && (counteractBaseOutcome !== degreeOfSuccess[3])) {
+        } else if ((counteractEffectRoll.naturalTwenty === true) && (counteractBaseOutcome !== degreeOfSuccess[3])) {
             counteractRollOutcome = degreeOfSuccess[degreeOfSuccess.indexOf(counteractBaseOutcome) + 1];
         } else {
             counteractRollOutcome = counteractBaseOutcome;
         };
         return counteractRollOutcome;
     };
-
-    // collecting above variables counteractEffectRoll
-    // const counteractVariables = () => {
-    //     counteractEffectRankSet();
-    //     counteractEffectRollSet();
-    //     counteractTargetRankSet();
-    //     counteractTargetDCSet();
-    //     counteractRollOutcomeSet();
-    // };
 
     const counteractComparison = () => {
         let counteractOutcome = {
@@ -120,43 +111,56 @@ const pfCounteract = (() => {
         const calculateButton = document.getElementById('calculate');
         calculateButton.addEventListener('click', () => {
             console.log('Button click!');
-            console.log(counteractOutcome);
-            // counteractVariables();
             let counteractEffectRank = counteractEffectRankSet();
-            counteractEffectRollSet();
-            counteractTargetRankSet();
-            counteractTargetDCSet();
-            counteractRollOutcomeSet();
-            if (counteractTargetRankSet.counteractTargetRank > counteractEffectRank + 3) {
+            let counteractEffectRoll = counteractEffectRollSet();
+            let counteractTargetRank = counteractTargetRankSet();
+            let counteractTargetDC = counteractTargetDCSet();
+            let counteractRollOutcome = counteractRollOutcomeSet(counteractEffectRoll, counteractTargetDC);
+            if (counteractTargetRank > counteractEffectRank + 3) {
                 counteractOutcome.outcome = 'failure';
-                counteractOutcome.message = 'The counteract target is more than 3 levels above the counteract effect. This is an impossible task.';
-            } else if (counteractRollOutcomeSet = 'critical success') {
+                counteractOutcome.message = 'The target is more than 3 levels higher than the counteract effect - this is an impossible task';
+            } else if ((counteractRollOutcome === 'critical success') && (counteractTargetRank > counteractEffectRank + 1)) {
+                counteractOutcome.outcome = 'success';
+                counteractOutcome.message = 'The counteract check has succeeded';
+            } else if (counteractRollOutcome === 'critical success') {
                 counteractOutcome.outcome = 'success';
                 counteractOutcome.message = 'The counteract check has critically succeeded';
-            } else if ((counteractRollOutcomeSet = 'success') && (counteractTargetRank <= counteractEffectRank + 1)) {
+            } else if ((counteractRollOutcome === 'success') && (counteractTargetRank <= counteractEffectRank + 1)) {
                 counteractOutcome.outcome = 'success';
                 counteractOutcome.message = 'The counteract check has succeeded';
-            } else if ((counteractRollOutcomeSet = 'success') && (counteractTargetRank > counteractEffectRank + 1)) {
+            } else if ((counteractRollOutcome === 'success') && (counteractTargetRank > counteractEffectRank + 1)) {
                 counteractOutcome.outcome = 'failure';
                 counteractOutcome.message = 'The counteract check has failed';
-            } else if ((counteractRollOutcomeSet = 'failure') && (counteractTargetRank < counteractEffectRank)) {
+            } else if ((counteractRollOutcome === 'failure') && (counteractTargetRank < counteractEffectRank)) {
                 counteractOutcome.outcome = 'success';
                 counteractOutcome.message = 'The counteract check has succeeded';
-            } else if ((counteractRollOutcomeSet = 'failure') && (counteractTargetRank > counteractEffectRank)) {
+            } else if ((counteractRollOutcome === 'failure') && (counteractTargetRank > counteractEffectRank)) {
                 counteractOutcome.outcome = 'failure';
                 counteractOutcome.message = 'The counteract check has failed';
-            } else if (counteractRollOutcomeSet === 'critical failure') {
+            } else if (counteractRollOutcome === 'critical failure') {
                 counteractOutcome.outcome = 'failure';
                 counteractOutcome.message = 'The counteract check has critially failed';
             };
+            displayController(counteractOutcome);
         });
-        return counteractOutcome;
     };
+
     counteractComparison();
 
-    // display controller to update the DOM based on the object from counteractComparison() above
+    // display controller to update the DOM and dark/light modes
 
-    const displayController = () => {
-
+    const displayController = (counteractOutcome) => {
+        const resultText = document.getElementById('result-text');
+        resultText.className = "";
+        if (counteractOutcome.outcome === 'success') {
+            resultText.className = 'result-success';
+            resultText.textContent = counteractOutcome.message;
+        } else if (counteractOutcome.outcome === 'failure') {
+            resultText.className = 'result-failure';
+            resultText.textContent = counteractOutcome.message;
+        } else {
+            resultText.className = 'result-placeholder';
+            resultText.textContent = "Fill out the fields above and click Calculate"
+        };
     };
 })();
