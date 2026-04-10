@@ -76,7 +76,6 @@ svg  {
     width: 100vw;
     font-size: var(--h1-font-size);
     font-weight: bold;
-    /* position: relative; */
     justify-content: center;
     align-items: center;
     padding: 15px;
@@ -101,12 +100,6 @@ svg  {
 .header svg {
     fill: var(--font-color-secondary);
     height: var(--h4-font-size);
-    /* margin: 0 0 0 35px;
-    padding-top: 15px;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%); */
 }
 
 /* ===================================
@@ -169,7 +162,7 @@ select {
     background-color: var(--background-color);
     border: solid 1px var(--border-color);
     border-radius: 6px;
-    padding: 5px 2px;
+    padding: 5px 2px 5px 7px;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
