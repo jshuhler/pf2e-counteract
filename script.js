@@ -137,7 +137,7 @@ const pfCounteract = (() => {
             } else if ((counteractRollOutcome === 'failure') && (counteractTargetRank < counteractEffectRank)) {
                 counteractOutcome.outcome = 'success';
                 counteractOutcome.message = 'The counteract check has succeeded';
-            } else if ((counteractRollOutcome === 'failure') && (counteractTargetRank > counteractEffectRank)) {
+            } else if ((counteractRollOutcome === 'failure') && (counteractTargetRank >= counteractEffectRank)) {
                 counteractOutcome.outcome = 'failure';
                 counteractOutcome.message = 'The counteract check has failed';
             } else if (counteractRollOutcome === 'critical failure') {
